@@ -1,3 +1,5 @@
+//Moore's Voting Algorithm
+
 #include <bits/stdc++.h> 
 vector<int> countTheNumber(vector<int> &arr, int n, int k) {
 	map<int,int> ans;
