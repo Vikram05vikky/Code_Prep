@@ -1,0 +1,70 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+
+// Possible moves of the knight
+ int row[8] = { 2, 1, -1, -2, -2, -1, 1, 2 };
+ int col[8] = { 1, 2, 2, 1, -1, -2, -2, -1 };
+
+int board[10][10]; // chess board
+int n; // board size
+
+bool isValid(int x, int y) {
+    // Check if position (x, y) is inside the board
+    return x >= 0 && y >= 0 && x < n && y < n;
+}
+
+bool solve(int x, int y, int moveNum) 
+{
+    if (moveNum == n * n) { // All cells visited
+        return true;
+    }
+    for (int i = 0; i < 8; i++) 
+    {
+        int nx = x + row[i];
+        int ny = y + col[i];
+        if (isValid(nx, ny) && board[nx][ny] == -1) 
+        { // Valid move
+            board[nx][ny] = moveNum;
+            if (solve(nx, ny, moveNum + 1)) 
+            { // Continue with next move
+                return true;
+            }
+            board[nx][ny] = -1; // Backtrack
+        }
+    }
+    return false; // No solution found
+}
+
+void printBoard() {
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++) 
+        {
+            cout << board[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    cin >> n;
+    // Initialize the board with -1 for unvisited cells
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < n; j++) 
+        {
+            board[i][j] = -1;
+        }
+    }
+    board[0][0] = 0; // Start position
+    if (solve(0, 0, 1)) 
+    { // Start from (0, 0) and move to next cell
+        printBoard(); // Solution found
+    } else {
+        cout << "Solution does not exist" << endl; // No solution
+    }
+    return 0;
+}
