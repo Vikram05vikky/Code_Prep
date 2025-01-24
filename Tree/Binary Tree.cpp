@@ -66,3 +66,97 @@ int main()
     Node* root=constructTree(arr);
     traversal(root);
 }
+
+
+/*
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+    public:
+        int data;
+        Node *left;
+        Node *right;
+        Node(int val)
+        {
+            this->data=val;
+            right=left=nullptr;
+        }
+};
+
+Node* constructTree()
+{
+    int val;
+    cin>>val;
+    
+    if(val == 0)
+        return nullptr;
+    
+    if(val == -1)
+        return nullptr;
+        
+    Node *root = new Node(val);
+    
+    if(val == 0)
+        return root;
+    
+    queue<Node*> q;
+    q.push(root);
+    
+    while(!q.empty())
+    {
+        Node* current = q.front();
+        q.pop();
+        
+        cin>>val;
+        if(val == 0)
+            return root;
+        if(val != -1)
+        {
+            current->left = new Node(val);
+            q.push(current->left);
+        }
+        
+        cin>>val;
+        if(val == 0)
+            return root;
+        if(val != -1)
+        {
+            current->right = new Node(val);
+            q.push(current->right);
+        }
+    }
+    
+    return root;
+    
+}
+
+void traversal(Node* root)
+{
+    if(!root)
+        return;
+        
+    queue<Node*> q;
+    q.push(root);
+    
+    while(!q.empty())
+    {
+        Node* current = q.front();
+        q.pop();
+        
+        cout<<current->data<<" ";
+        if(current->left)
+            q.push(current->left);
+        if(current->right)
+            q.push(current->right);
+    }
+}
+
+int main()
+{
+    Node *root=constructTree();
+    traversal(root);
+    
+}
+*/
